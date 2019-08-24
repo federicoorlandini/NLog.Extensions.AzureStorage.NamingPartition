@@ -1,13 +1,7 @@
-﻿using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Auth;
-using Microsoft.WindowsAzure.Storage.Table;
+﻿using Microsoft.WindowsAzure.Storage.Table;
 using NLog.Config;
 using NLog.Targets;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NLog.Extensions.AzureStorage.NamingPartition
 {
@@ -24,14 +18,27 @@ namespace NLog.Extensions.AzureStorage.NamingPartition
 
         private CloudTableCache _cloudTableCache;
 
-        private readonly string _machineName = "localhost";
+        private readonly string _machineName = Environment.MachineName;
 
         protected override void InitializeTarget()
         {
-            // Define which client to use to write in the Azure Table
+            ValidateTableNamePrefix();
+
             _cloudTableCache = new CloudTableCache(ConnectionString);
 
             base.InitializeTarget();
+        }
+
+        private void ValidateTableNamePrefix()
+        {
+            // There are limitations in the name for an Azure Storage Table
+            // (see https://blogs.msdn.microsoft.com/jmstall/2014/06/12/azure-storage-naming-rules/)
+            // In particular, the name cannot be longer than 63 characters, so we need to check if the
+            // prefix name for the table is no longer than 63 chars - 6 chars (year and month) = 57
+            if(TableNamePrefix.Length > 57)
+            {
+                throw new InvalidOperationException("The TableNamePrefix property cannot be longer than 57 characters.");
+            }
         }
 
         protected override void Write(LogEventInfo logEvent)
@@ -45,7 +52,6 @@ namespace NLog.Extensions.AzureStorage.NamingPartition
 
             table.Execute(insertOperation);
 
-            // Write in the Azure Table
             base.Write(logEvent);
         }
     }

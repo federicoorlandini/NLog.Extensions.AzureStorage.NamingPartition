@@ -3,9 +3,6 @@ using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,7 +14,7 @@ namespace NLog.Extensions.AzureStorage.NamingPartition
         private const int CacheSlidingExpirationInMinutes = 10;
 
         private MemoryCache _cache = new MemoryCache(new MemoryCacheOptions());
-        private ConcurrentDictionary<object, SemaphoreSlim> _locks = new ConcurrentDictionary<object, SemaphoreSlim>();
+        private readonly ConcurrentDictionary<object, SemaphoreSlim> _locks = new ConcurrentDictionary<object, SemaphoreSlim>();
 
         private readonly CloudTableClient _cloudTableClient;
 
@@ -29,9 +26,9 @@ namespace NLog.Extensions.AzureStorage.NamingPartition
 
         public async Task<CloudTable> GetOrSet(string tableNamePrefix)
         {
-            CloudTable cacheEntry;
-            if (!_cache.TryGetValue(tableNamePrefix, out cacheEntry))// Look for cache key.
+            if (!_cache.TryGetValue(tableNamePrefix, out CloudTable cacheEntry))
             {
+                // Check if the specific semaphore is green
                 SemaphoreSlim mylock = _locks.GetOrAdd(tableNamePrefix, k => new SemaphoreSlim(1, 1));
 
                 await mylock.WaitAsync();
@@ -40,7 +37,7 @@ namespace NLog.Extensions.AzureStorage.NamingPartition
                 {
                     if (!_cache.TryGetValue(tableNamePrefix, out cacheEntry))
                     {
-                        // Key not in cache, so get data.
+                        // Key not in cache, so get data and create the entry
                         cacheEntry = CreateCloudTable(tableNamePrefix);
                         _cache.Set(tableNamePrefix, cacheEntry, TimeSpan.FromMinutes(CacheSlidingExpirationInMinutes));
                     }
