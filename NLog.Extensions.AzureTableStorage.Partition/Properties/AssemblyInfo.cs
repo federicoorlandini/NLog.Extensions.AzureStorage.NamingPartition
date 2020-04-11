@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NLog.Extensions.AzureStorage.NamingPartition")]
+[assembly: AssemblyTitle("NLog.Extensions.AzureTableStorage.Partition")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("NLog.Extensions.AzureStorage.NamingPartition")]
+[assembly: AssemblyProduct("NLog.Extensions.AzureTableStorage.Partition")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

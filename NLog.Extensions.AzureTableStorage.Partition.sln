@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28922.388
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1062
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLog.Extensions.AzureStorage.NamingPartition", "NLog.Extensions.AzureStorage.NamingPartition\NLog.Extensions.AzureStorage.NamingPartition.csproj", "{40508FF3-6F72-42E6-A15C-F42A2FF41C3B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLog.Extensions.AzureTableStorage.Partition", "NLog.Extensions.AzureStorage.NamingPartition\NLog.Extensions.AzureTableStorage.Partition.csproj", "{40508FF3-6F72-42E6-A15C-F42A2FF41C3B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingApp", "TestingApp\TestingApp.csproj", "{AF15C387-A29F-4752-AE00-3C15F5F75087}"
 EndProject

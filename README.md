@@ -1,4 +1,4 @@
-# NLog.Extensions.AzureStorage.NamingPartition
+# NLog.Extensions.AzureTableStorage.Partition
 An NLog extension to store your NLog entries in Azure Tables partitioned by year and month.
 
 Why using this extension
@@ -28,7 +28,7 @@ How to configure the extension
 ### Syntax
 ```XML
 <targets>
-    <target type="AzureTableStorageByMonth"
+    <target type="MonthlyTableStrategy"
 	name="string"
 	layout="Layout"
         ConnectionString="String"

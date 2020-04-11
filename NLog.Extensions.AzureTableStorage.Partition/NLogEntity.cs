@@ -1,7 +1,7 @@
 ﻿using Microsoft.WindowsAzure.Storage.Table;
 using System;
 
-namespace NLog.Extensions.AzureStorage.NamingPartition
+namespace NLog.Extensions.AzureTableStorage.Partition
 {
     class NLogEntity : TableEntity
     {

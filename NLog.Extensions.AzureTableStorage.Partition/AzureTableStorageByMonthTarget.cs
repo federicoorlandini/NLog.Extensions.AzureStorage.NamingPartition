@@ -3,10 +3,10 @@ using NLog.Config;
 using NLog.Targets;
 using System;
 
-namespace NLog.Extensions.AzureStorage.NamingPartition
+namespace NLog.Extensions.AzureTableStorage.Partition
 {
-    [Target("AzureTableStorageByMonth")]
-    public class AzureTableStorageByMonthTarget : TargetWithLayout
+    [Target("MonthlyTableStrategy")]
+    public class MonthlyTableStrategy : TargetWithLayout
     {
         [RequiredParameter]
         public string ConnectionString { get; set; }
@@ -31,6 +31,11 @@ namespace NLog.Extensions.AzureStorage.NamingPartition
 
         private void ValidateTableName()
         {
+            if( string.IsNullOrEmpty(TableName) )
+            {
+                throw new InvalidOperationException("The table name is empty or null");
+            }
+
             // There are limitations in the name for an Azure Storage Table
             // (see https://blogs.msdn.microsoft.com/jmstall/2014/06/12/azure-storage-naming-rules/)
             // In particular, the name cannot be longer than 63 characters, so we need to check if the
@@ -38,6 +43,11 @@ namespace NLog.Extensions.AzureStorage.NamingPartition
             if(TableName.Length > 57)
             {
                 throw new InvalidOperationException("The TableNamePrefix property cannot be longer than 57 characters.");
+            }
+
+            if (char.IsDigit(TableName[0]))
+            {
+                throw new InvalidOperationException("The table name cannot start with a digit.");
             }
         }
 

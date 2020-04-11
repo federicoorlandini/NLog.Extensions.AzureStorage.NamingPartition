@@ -7,8 +7,8 @@
     <ProjectGuid>{40508FF3-6F72-42E6-A15C-F42A2FF41C3B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NLog.Extensions.AzureStorage.NamingPartition</RootNamespace>
-    <AssemblyName>NLog.Extensions.AzureStorage.NamingPartition</AssemblyName>
+    <RootNamespace>NLog.Extensions.AzureTableStorage.Partition</RootNamespace>
+    <AssemblyName>NLog.Extensions.AzureTableStorage.Partition</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

@@ -7,15 +7,14 @@ using System.Threading;
 using System.Threading.Tasks;
 
 
-namespace NLog.Extensions.AzureStorage.NamingPartition
+namespace NLog.Extensions.AzureTableStorage.Partition
 {
     class CloudTableCache
     {
         private const int CacheSlidingExpirationInMinutes = 10;
 
-        private MemoryCache _cache = new MemoryCache(new MemoryCacheOptions());
+        private readonly MemoryCache _cache = new MemoryCache(new MemoryCacheOptions());
         private readonly ConcurrentDictionary<object, SemaphoreSlim> _locks = new ConcurrentDictionary<object, SemaphoreSlim>();
-
         private readonly CloudTableClient _cloudTableClient;
 
         public CloudTableCache(string azureStorageConnectionString)
