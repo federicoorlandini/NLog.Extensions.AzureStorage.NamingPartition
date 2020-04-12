@@ -50,10 +50,11 @@
     <None Include="App.config" />
     <None Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NLog.Extensions.AzureStorage.NamingPartition\NLog.Extensions.AzureTableStorage.Partition.csproj">
+    <ProjectReference Include="..\NLog.Extensions.AzureTableStorage.Partition\NLog.Extensions.AzureTableStorage.Partition.csproj">
       <Project>{40508ff3-6f72-42e6-a15c-f42a2ff41c3b}</Project>
       <Name>NLog.Extensions.AzureTableStorage.Partition</Name>
     </ProjectReference>
